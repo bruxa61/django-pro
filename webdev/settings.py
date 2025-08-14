@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-y2bp!#!aa$69mwqf)6)0ev^-1wmkxdj!cj-=j3-offw0rvvr40
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bruxa.pythonanywhere.com']
+ALLOWED_HOSTS = ['bruxa.pythonanywhere.com', "127.0.0.1"]
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mycontacts',
 ]
 
 MIDDLEWARE = [
