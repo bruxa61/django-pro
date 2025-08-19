@@ -1,0 +1,17 @@
+{% extends 'mycontacts/background.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-show", style="text-align: center;">
+    <h1>Detalhes do Contato</h1>
+    <p><strong>Nome:</strong> {{ contact.name }}</p>
+    <p><strong>Relação:</strong> {{ contact.relation }}</p>
+    <p><strong>Telefone:</strong> {{ contact.phone }}</p>
+    <p><strong>Email:</strong> <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></p>
+    <div class="actions">
+        <a href="/edit/{{ contact.id }}/"><img src="{% static 'mycontacts/edit.png' %}" alt="Editar" width="20" height="20"></a>
+        <a href="/delete/{{ contact.id }}/" onclick="return confirm(\'Tem certeza que deseja excluir este contato?\')"><img src="{% static 'mycontacts/delete.png' %}" alt="Excluir" width="20" height="20"></a>
+    </div>
+    <a href="/" class="btn btn-default">Voltar para a lista de contatos</a>
+</div>
+{% endblock content %}

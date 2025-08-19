@@ -1,3 +1,4 @@
+# Create your views here.
 from django.shortcuts import render
 from .forms import AddForm
 from .models import Contact
@@ -41,22 +42,22 @@ def add(request):
     else:
         return render(request, 'mycontacts/add.html')
 
+def details(request, contact_id):
+    contact = Contact.objects.get(id=contact_id)
+    return render(request, 'mycontacts/details.html', {'contact': contact})
+
 def edit(request, contact_id):
-    contact = get_object_or_404(Contact, pk=contact_id)
+    contact = Contact.objects.get(id=contact_id)
     if request.method == 'POST':
-        form = AddForm(request.POST, instance=contact)
-        if form.is_valid():
-            form.save()
-            return redirect('show')
+        django_form = AddForm(request.POST, instance=contact)
+        if django_form.is_valid():
+            django_form.save()
+            return HttpResponseRedirect('/')
     else:
-        form = AddForm(instance=contact)
-    return render(request, 'mycontacts/edit.html', {'form': form, 'contact': contact})
+        django_form = AddForm(instance=contact)
+    return render(request, 'mycontacts/edit.html', {'form': django_form, 'contact': contact})
 
 def delete(request, contact_id):
-    contact = get_object_or_404(Contact, pk=contact_id)
-    if request.method == 'POST': # É recomendado usar POST para exclusão
-        contact.delete()
-        return redirect('show')
-    # Opcional: renderizar uma página de confirmação antes de excluir
-    return render(request, 'mycontacts/confirm_delete.html', {'contact': contact})
-    
+    contact = Contact.objects.get(id=contact_id)
+    contact.delete()
+    return HttpResponseRedirect("/")
