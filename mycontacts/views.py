@@ -1,5 +1,4 @@
-# Create your views here.
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import AddForm
 from .models import Contact
 from django.http import HttpResponseRedirect
@@ -42,22 +41,15 @@ def add(request):
     else:
         return render(request, 'mycontacts/add.html')
 
-def details(request, contact_id):
-    contact = Contact.objects.get(id=contact_id)
-    return render(request, 'mycontacts/details.html', {'contact': contact})
-
-def edit(request, contact_id):
-    contact = Contact.objects.get(id=contact_id)
+def edit_contact(request, pk):  # <-- adicione o pk como parâmetro
+    contact = get_object_or_404(Contact, pk=pk)
+    
     if request.method == 'POST':
-        django_form = AddForm(request.POST, instance=contact)
-        if django_form.is_valid():
-            django_form.save()
-            return HttpResponseRedirect('/')
+        form = AddForm(request.POST, instance=contact)
+        if form.is_valid():
+            form.save()
+            return redirect('show')  # Nome da rota de listagem
     else:
-        django_form = AddForm(instance=contact)
-    return render(request, 'mycontacts/edit.html', {'form': django_form, 'contact': contact})
-
-def delete(request, contact_id):
-    contact = Contact.objects.get(id=contact_id)
-    contact.delete()
-    return HttpResponseRedirect("/")
+        form = AddForm(instance=contact)
+    
+    return render(request, 'mycontacts/edit.html', {'form': form, 'contact': contact})

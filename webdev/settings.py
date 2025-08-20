@@ -21,12 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*2wyp8keizm=afadt^tt)#x7tr(1csbvq@pw18o9wkcl5r$4_y'
+SECRET_KEY = 'django-insecure-6)g2qgku4q!utfl09#nxk_)#vsjnv++i9+jaqwmlw(kgl8d4(f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['brubsb.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['rai123100.pythonanywhere.com',
+                 '127.0.0.1']
 
 
 # Application definition
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mycontacts',
+    'mycontacts' # Link com o app
 ]
 
 MIDDLEWARE = [
@@ -117,10 +118,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/') # NECESSARIO PARA O DEPLOY
 STATICFILES_DIR = [
     BASE_DIR / 'static/',
-]
+    ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
