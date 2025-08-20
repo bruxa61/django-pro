@@ -27,7 +27,14 @@ SECRET_KEY = 'django-insecure-6)g2qgku4q!utfl09#nxk_)#vsjnv++i9+jaqwmlw(kgl8d4(f
 DEBUG = True
 
 ALLOWED_HOSTS = ['rai123100.pythonanywhere.com',
-                 '127.0.0.1']
+                 '127.0.0.1',
+                 '8000-ilo4ucoog5883i22h3pga-c103f579.manusvm.computer',
+                 '*']
+
+# CSRF settings for external access
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-ilo4ucoog5883i22h3pga-c103f579.manusvm.computer',
+]
 
 
 # Application definition

@@ -14,42 +14,30 @@ def show(request):
 def add(request):
     """ This function is called to add one contact member to your contact list in your Database """
     if request.method == 'POST':
-        
-        django_form = AddForm(request.POST)
-        if django_form.is_valid():
-           
-            """ Assign data in Django Form to local variables """
-            new_member_name = django_form.data.get("name")
-            new_member_relation = django_form.data.get("relation")
-            new_member_phone = django_form.data.get('phone')
-            new_member_email = django_form.data.get('email')
-            
-            """ This is how your model connects to database and create a new member """
-            Contact.objects.create(
-                name =  new_member_name, 
-                relation = new_member_relation,
-                phone = new_member_phone,
-                email = new_member_email, 
-                )
-                 
-            contact_list = Contact.objects.all()
-            return render(request, 'mycontacts/show.html',{'contacts': contact_list})    
-        
-        else:
-            """ redirect to the same page if django_form goes wrong """
-            return render(request, 'mycontacts/add.html')
+        form = AddForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('show')
     else:
-        return render(request, 'mycontacts/add.html')
+        form = AddForm()
+    
+    return render(request, 'mycontacts/add.html', {'form': form})
 
-def edit_contact(request, pk):  # <-- adicione o pk como parâmetro
+def edit_contact(request, pk):
     contact = get_object_or_404(Contact, pk=pk)
     
     if request.method == 'POST':
         form = AddForm(request.POST, instance=contact)
         if form.is_valid():
             form.save()
-            return redirect('show')  # Nome da rota de listagem
+            return redirect('show')
     else:
         form = AddForm(instance=contact)
     
     return render(request, 'mycontacts/edit.html', {'form': form, 'contact': contact})
+
+def delete_contact(request, pk):
+    contact = get_object_or_404(Contact, pk=pk)
+    contact.delete()
+    return redirect('show')
+

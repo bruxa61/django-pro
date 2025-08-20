@@ -17,7 +17,7 @@
                 </div>
                 <div class="imagens">
                     <a href="{% url 'edit_contact' contact.pk %}"><img src="{% static 'css/img/Lapis(Edição).png' %}" alt="Editar" class="editar"></a>
-                    <a href="#"><img src="{% static 'css/img/Lixeira(Edição).png' %}" alt="Excluir" class="excluir"></a>
+                    <a href="{% url 'delete_contact' contact.pk %}"><img src="{% static 'css/img/Lixeira(Edição).png' %}" alt="Excluir" class="excluir"></a>
                 </div>
             </div>
         </li>
